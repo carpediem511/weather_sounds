@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Звуки природы</title>
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+	<div class="content">
+
+		<div class="overlay"></div>
+
+		<div class="carousel">
+			<div class="carousel-item sunny">
+				<img src="./images/summer-bg.jpg" alt="sunny" />
+			</div>
+			<div class="carousel-item rainy">
+				<img src="./images/rainy-bg.jpg" alt="rainy" />
+			</div>
+			<div class="carousel-item snowy">
+				<img src="./images/winter-bg.jpg" alt="snowy" />
+			</div>
+		</div>
+
+		<div class="carousel-controls">
+			<button class="control-button sunny-btn">
+				<img src="./icons/sun.svg" alt="Sunny weather" />
+			</button>
+			<button class="control-button rainy-btn">
+				<img src="./icons/cloud-rain.svg" alt="Rainy weather" />
+			</button>
+			<button class="control-button snowy-btn">
+				<img src="./icons/cloud-snow.svg" alt="Snowy weather" />
+			</button>
+		</div>
+
+		<div class="panel-controls">
+
+			<button class="control-button">
+				<img src="./icons/play.png" alt="Pause button" />
+			</button>
+
+			<div class="range-container">
+				<input type="range" min="0" max="100" value="25" class="range-slider" step="25" />
+				<div class="range-marks">
+					<span>|</span>
+					<span>|</span>
+					<span>|</span>
+					<span>|</span>
+					<span>|</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="app.ts"></script>
+</body>
+
+</html>
