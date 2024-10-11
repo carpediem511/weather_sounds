@@ -23,6 +23,7 @@ body {
     background-image: url('./images/main-bg.jpg'); 
     background-size: contain; 
     background-position: center; 
+    transition: background-image 0.5s ease-in-out;
 }
 
 .overlay {

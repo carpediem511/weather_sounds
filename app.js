@@ -1,25 +1,56 @@
-var background = document.getElementById('content');
-var buttonsWeather = document.querySelectorAll('.carousel-controls .control-button');
-var weather = [
-    { name: 'sunny', path: './images/summer-bg.jpg' },
-    { name: 'rainy', path: './images/rainy-bg.jpg' },
-    { name: 'snowy', path: './images/winter-bg.jpg' }
+"use strict";
+const background = document.getElementById('content');
+const buttonsWeather = document.querySelectorAll('.carousel-controls .control-button');
+const audioSun = new Audio('./sounds/summer.mp3');
+const audioRain = new Audio('./sounds/rain.mp3');
+const audioSnow = new Audio('./sounds/winter.mp3');
+const stopBtn = document.getElementById('play-pause-btn');
+const weather = [
+    { name: 'sunny', path: './images/summer-bg.jpg', sound: audioSun },
+    { name: 'rainy', path: './images/rainy-bg.jpg', sound: audioRain },
+    { name: 'snowy', path: './images/winter-bg.jpg', sound: audioSnow }
 ];
-var changeBackground = function (weatherType) {
-    var selectedWeather = weather.find(function (w) { return w.name === weatherType; });
+let currentAudio = null;
+const changeBackground = (weatherType) => {
+    const selectedWeather = weather.find(w => w.name === weatherType);
     if (selectedWeather) {
-        background.style.backgroundImage = "url(".concat(selectedWeather.path, ")");
+        background.style.backgroundImage = `url(${selectedWeather.path})`;
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        background.classList.remove('sunny', 'rainy', 'snowy');
+        background.classList.add(selectedWeather.name);
+        currentAudio = selectedWeather.sound;
+        currentAudio.play();
     }
     else {
-        console.log("\u041D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0438\u0435 \u0434\u043B\u044F \u043F\u043E\u0433\u043E\u0434\u044B: ".concat(weatherType));
+        console.log(`Не найдено соответствие для погоды: ${weatherType}`);
     }
 };
-buttonsWeather.forEach(function (button) {
-    var weatherType = button.getAttribute('data-weather');
+buttonsWeather.forEach((button) => {
+    const weatherType = button.getAttribute('data-weather');
     if (weatherType) {
-        button.addEventListener('click', function () { return changeBackground(weatherType); });
+        button.addEventListener('click', () => {
+            if (currentAudio && !currentAudio.paused && currentAudio.src.includes(weatherType)) {
+                currentAudio.pause();
+            }
+            else {
+                changeBackground(weatherType);
+            }
+        });
     }
     else {
         console.log('Атрибут data-weather не найден у кнопки.');
+    }
+});
+stopBtn.addEventListener('click', () => {
+    if (currentAudio) {
+        if (currentAudio.paused) {
+            currentAudio.play();
+        }
+        else {
+            currentAudio.pause();
+        }
     }
 });
