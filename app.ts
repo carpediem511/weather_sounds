@@ -79,7 +79,7 @@ const initializeWeatherButtons = () => {
 				}
 			})
 		} else {
-			console.log('Атрибут data-weather не найден у кнопки.')
+			console.log('Атрибут data-weather не найден у кнопки')
 		}
 	})
 }
