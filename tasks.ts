@@ -20,3 +20,4 @@ const TotalPrice = ({ price, discount, isInstallment, months }: TotalPriceType):
 
 const price = TotalPrice({ price: 100000, discount: 25, isInstallment: true, months: 12 });
 console.log(price); // 6250
+
